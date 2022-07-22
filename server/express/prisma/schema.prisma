@@ -11,31 +11,42 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        String   @id @default(cuid())
-  name      String
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+model Users {
+  id           String         @id @unique @default(cuid())
+  name         String
+  email        String         @unique
+  password     String
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @default(now())
+  Transactions Transactions[]
 }
 
 model Transactions {
-  id        String   @id @default(cuid())
+  id        String   @id @unique @default(cuid())
+  Users     Users    @relation(fields: [userId], references: [id])
   userId    String
-  amount    Int
-  Items     Items    @relation(fields: [itemId], references: [id])
-  itemId    String   @unique
-  value     Int
+  Coins     Coins    @relation(fields: [coinId], references: [id])
+  coinId    String   @unique
+  Prices    Prices   @relation(fields: [priceId], references: [id])
+  priceId   String   @unique
+  amount    Float
+  value     Float
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 }
 
-model Items {
-  id          String         @id @default(cuid())
-  name        String
-  value       Int
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @default(now())
-  Transaction Transactions[]
+model Coins {
+  id           String         @id @unique @default(cuid())
+  name         String
+  Transactions Transactions[]
+  Prices       Prices[]
+}
+
+model Prices {
+  id           String         @id @unique @default(cuid())
+  Coins        Coins          @relation(fields: [coinId], references: [id])
+  coinId       String
+  prices       Float
+  createdAt    DateTime       @default(now())
+  Transactions Transactions[]
 }
