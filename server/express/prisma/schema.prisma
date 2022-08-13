@@ -46,7 +46,7 @@ model Prices {
   id           String         @id @unique @default(cuid())
   Coins        Coins          @relation(fields: [coinId], references: [id])
   coinId       String
-  prices       Float
+  price        Float
   createdAt    DateTime       @default(now())
   Transactions Transactions[]
 }

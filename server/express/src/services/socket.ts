@@ -1,10 +1,7 @@
-import fetchCoinData from "./request"
 import { PrismaClient } from "@prisma/client"
-import { Socket } from "socket.io"
 import { Server } from "socket.io"
 import http from "http"
-import { writeHeapSnapshot } from "v8"
-var heapdump = require("heapdump")
+import fetchCoinData from "./request"
 
 export default (server: http.Server) => {
   const prisma = new PrismaClient()
@@ -27,7 +24,7 @@ export default (server: http.Server) => {
       })
 
       if (counter % 10 === 1) {
-        for (let { current_price, id } of res) {
+        for (const { current_price, id } of res) {
           await prisma.prices.create({
             data: { price: current_price, coinId: id },
           })
@@ -44,7 +41,7 @@ export default (server: http.Server) => {
 
   const io = new Server(server)
 
-  io.on("connection", (socket: Socket) => {
+  io.on("connection", () => {
     console.log("a user connected")
   })
 

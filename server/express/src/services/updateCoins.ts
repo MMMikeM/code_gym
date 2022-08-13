@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient } from "@prisma/client"
+import { PrismaClient } from "@prisma/client"
 import fetchCoinData from "./request"
 
 export default async () => {
@@ -6,9 +6,9 @@ export default async () => {
 
   const res = await fetchCoinData()
 
-  for (let { id, name } of res) {
+  for (const { id, name } of res) {
     try {
-      await prisma.coin.upsert({
+      await prisma.coins.upsert({
         where: { id },
         update: { name },
         create: { id, name },
