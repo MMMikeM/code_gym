@@ -9,10 +9,12 @@ Frontend:
 - Solid
 - Astro
 - Fresh
+- Lit
 
 Backend:
 
 - Express
 - Fastify
+- Koa
 - NestJS
 - Go

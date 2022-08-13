@@ -1,0 +1,17 @@
+ls:
+  .js: kebab-case
+  .config.js: kebab-case
+  .ts: kebab-case
+  .d.ts: kebab-case
+  .tsx: PascalCase
+  .stories.tsx: PascalCase
+  .dir: kebab-case
+  pages:
+    .tsx: snake_case
+
+ignore:
+  - .git
+  - node_modules
+  - .next
+  - .storybook
+  - .vscode

@@ -1,3 +1,8 @@
 {
-  "extends": "next/core-web-vitals"
+	"extends": ["next/core-web-vitals", "plugin:tailwindcss/recommended"],
+	"plugins": ["tailwindcss"],
+	"rules": {
+		// Not relevant in this project
+		"react/no-unescaped-entities": 0
+	}
 }
